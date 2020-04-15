@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SPCApp.NewProductPage"
+             Title="New Product">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Sklep:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="shopName" HorizontalOptions="FillAndExpand" Text="{Binding ShopName}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Produkt:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="productName" HorizontalOptions="FillAndExpand" Text="{Binding ProductName}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Firma:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="manufacturerName"  HorizontalOptions="FillAndExpand" Text="{Binding ManufacturerName}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cena [zł]:" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="price" Placeholder="Cena" TextChanged="OnPriceChange"  WidthRequest="70" Text="{Binding Price,  StringFormat=''}" />
+            <Label Text="Waga [g]:" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="volume"  WidthRequest="70" TextChanged="OnVolumeChange" Text="{Binding Volume,  StringFormat=''}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Ilość [szt.]:" HorizontalOptions="Start"  VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="quantity" HorizontalOptions="FillAndExpand" TextChanged="OnQuantityChange" Text="{Binding Quantity, StringFormat='1'}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cena za 100g [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="150"/>
+            <Entry x:Name="pricePerVolume" HorizontalOptions="FillAndExpand" IsReadOnly="True" Text="{Binding PricePerVolume,  StringFormat=''}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cena za sztukę [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="150"/>
+            <Entry x:Name="pricePerQuantity"  HorizontalOptions="FillAndExpand"  IsReadOnly="True" Text="{Binding PricePerQuantity,  StringFormat=''}" />
+        </StackLayout>
+        <Button x:Name="addNewProductButton" Text="Add new product" Clicked="OnAddNewProductButtonClicked" IsVisible="false"/>
+    </StackLayout>
+</ContentPage>

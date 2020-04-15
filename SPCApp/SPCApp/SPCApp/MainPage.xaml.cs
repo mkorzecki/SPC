@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPCApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,19 @@ namespace SPCApp
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private async void OnCreateNewProductButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewProductPage
+            {
+                BindingContext = new Product()
+            });
+        }
+
+        private async void OnShowAllProductButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ProductsPage());            
         }
     }
 }

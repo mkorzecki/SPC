@@ -4,13 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SPCApp.MainPage">
-
+             x:Class="SPCApp.MainPage"
+             Title="Shop Price Comparing">
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
-
+        <Button Text="Create new product" Clicked="OnCreateNewProductButtonClicked"/>
+            <Button Text="Show all product" Clicked="OnShowAllProductButtonClicked"/>
+        </StackLayout>
 </ContentPage>
