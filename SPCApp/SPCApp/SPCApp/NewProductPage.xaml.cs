@@ -24,6 +24,7 @@ namespace SPCApp
         {
             var product = (Product)BindingContext;
             product.CreatedDate = DateTime.UtcNow;
+            product.ModifiedDate = DateTime.UtcNow;
             await App.Database.SaveProductAsync(product);
             await Navigation.PushAsync(new ProductsPage());
         }

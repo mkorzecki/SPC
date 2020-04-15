@@ -29,7 +29,7 @@ namespace SPCApp
 
         private async void OnShowAllProductButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ProductsPage());            
+            await Navigation.PushAsync(new ProductsPage());
         }
     }
 }

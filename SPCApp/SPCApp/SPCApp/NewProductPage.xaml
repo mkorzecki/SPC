@@ -20,21 +20,19 @@
             <Entry x:Name="manufacturerName"  HorizontalOptions="FillAndExpand" Text="{Binding ManufacturerName}" />
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Cena [zł]:" VerticalOptions="Center" WidthRequest="70"/>
-            <Entry x:Name="price" Placeholder="Cena" TextChanged="OnPriceChange"  WidthRequest="70" Text="{Binding Price,  StringFormat=''}" />
+            <Label Text="Cena [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="price" TextChanged="OnPriceChange"  WidthRequest="70" Text="{Binding Price,  StringFormat=''}" />
             <Label Text="Waga [g]:" VerticalOptions="Center" WidthRequest="70"/>
-            <Entry x:Name="volume"  WidthRequest="70" TextChanged="OnVolumeChange" Text="{Binding Volume,  StringFormat=''}" />
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Ilość [szt.]:" HorizontalOptions="Start"  VerticalOptions="Center" WidthRequest="70"/>
-            <Entry x:Name="quantity" HorizontalOptions="FillAndExpand" TextChanged="OnQuantityChange" Text="{Binding Quantity, StringFormat='1'}" />
+            <Entry x:Name="volume" HorizontalOptions="FillAndExpand" WidthRequest="70" TextChanged="OnVolumeChange" Text="{Binding Volume,  StringFormat=''}" />
         </StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="Cena za 100g [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="150"/>
             <Entry x:Name="pricePerVolume" HorizontalOptions="FillAndExpand" IsReadOnly="True" Text="{Binding PricePerVolume,  StringFormat=''}" />
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Cena za sztukę [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="150"/>
+            <Label Text="Ilość [szt.]:" HorizontalOptions="Start"  VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="quantity" WidthRequest="30" TextChanged="OnQuantityChange" Text="{Binding Quantity, StringFormat='1'}" />
+            <Label Text="Cena za sztukę [zł]:" VerticalOptions="Center" WidthRequest="120"/>
             <Entry x:Name="pricePerQuantity"  HorizontalOptions="FillAndExpand"  IsReadOnly="True" Text="{Binding PricePerQuantity,  StringFormat=''}" />
         </StackLayout>
         <Button x:Name="addNewProductButton" Text="Add new product" Clicked="OnAddNewProductButtonClicked" IsVisible="false"/>
