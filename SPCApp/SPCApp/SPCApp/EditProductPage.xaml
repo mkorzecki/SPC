@@ -9,34 +9,45 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="Sklep:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
-                <Entry x:Name="shopName" HorizontalOptions="FillAndExpand" Text="{Binding ShopName}" />
+            <Label Text="Sklep:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
+                <Picker x:Name="shopsName" HorizontalOptions="FillAndExpand">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Biedronka</x:String>
+                            <x:String>Stokrotka</x:String>
+                            <x:String>Selgros</x:String>
+                            <x:String>Lidl</x:String>
+                            <x:String>Żabka</x:String>
+                            <x:String>E'Leclerc</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Produkt:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
-                <Entry x:Name="productName" HorizontalOptions="FillAndExpand" Text="{Binding ProductName}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Firma:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
-                <Entry x:Name="manufacturerName"  HorizontalOptions="FillAndExpand" Text="{Binding ManufacturerName}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Cena [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
-                <Entry x:Name="price" TextChanged="OnPriceChange"  WidthRequest="70" Text="{Binding Price}" />
-                <Label Text="Waga [g]:" VerticalOptions="Center" WidthRequest="70"/>
-                <Entry x:Name="volume" HorizontalOptions="FillAndExpand" WidthRequest="70" TextChanged="OnVolumeChange" Text="{Binding Volume}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Cena za 100g [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="150"/>
-                <Entry x:Name="pricePerVolume" HorizontalOptions="FillAndExpand" IsReadOnly="True" Text="{Binding PricePerVolume}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Ilość [szt.]:" HorizontalOptions="Start"  VerticalOptions="Center" WidthRequest="70"/>
-                <Entry x:Name="quantity" WidthRequest="30" TextChanged="OnQuantityChange" Text="{Binding Quantity}" />
-                <Label Text="Cena za sztukę [zł]:" VerticalOptions="Center" WidthRequest="120"/>
-                <Entry x:Name="pricePerQuantity"  HorizontalOptions="FillAndExpand"  IsReadOnly="True" Text="{Binding PricePerQuantity}" />
-            </StackLayout>
-            <Button x:Name="EditProductButton" Text="Edit product" Clicked="OnEditProductButtonClicked"/>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Produkt:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="productName" HorizontalOptions="FillAndExpand" Text="{Binding ProductName}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Firma:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="manufacturerName"  HorizontalOptions="FillAndExpand" Text="{Binding ManufacturerName}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cena [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="70" />
+            <Entry x:Name="price"  WidthRequest="70" Keyboard="Numeric" TextChanged="OnPriceChange"  Text="{Binding Price}" />
+            <Label Text="Waga [g]:" VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="volume" HorizontalOptions="FillAndExpand" WidthRequest="70" Keyboard="Numeric" TextChanged="OnVolumeChange" Text="{Binding Volume}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cena za 100g [zł]:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="150"/>
+            <Entry x:Name="pricePerVolume" HorizontalOptions="FillAndExpand" IsReadOnly="True" Text="{Binding PricePerVolume}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Ilość [szt.]:" HorizontalOptions="Start"  VerticalOptions="Center" WidthRequest="70"/>
+            <Entry x:Name="quantity" WidthRequest="30"  Keyboard="Numeric" TextChanged="OnQuantityChange" Text="{Binding Quantity}" />
+            <Label Text="Cena za sztukę [zł]:" VerticalOptions="Center" WidthRequest="120"/>
+            <Entry x:Name="pricePerQuantity"  HorizontalOptions="FillAndExpand"  IsReadOnly="True" Text="{Binding PricePerQuantity}" />
+        </StackLayout>
+        <Button x:Name="EditProductButton" Text="Edit product" Clicked="OnEditProductButtonClicked"/>
             <Button x:Name="deleteProducttButton" Text="Delete product" Clicked="OnDeleteProductButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>

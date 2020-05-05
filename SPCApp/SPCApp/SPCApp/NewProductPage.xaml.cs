@@ -15,18 +15,32 @@ namespace SPCApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewProductPage : ContentPage
     {
+        private Product _product;
         public NewProductPage()
         {
             InitializeComponent();
+            //shopsName.Items.Add("Biedronka");
+            //shopsName.Items.Add("Stokrotka");
+            //shopsName.Items.Add("Selgros");
         }
 
         async private void OnAddNewProductButtonClicked(object sender, EventArgs e)
         {
-            var product = (Product)BindingContext;
-            product.CreatedDate = DateTime.UtcNow;
-            product.ModifiedDate = DateTime.UtcNow;
-            await App.Database.SaveProductAsync(product);
-            await Navigation.PushAsync(new ProductsPage());
+            _product = new Product()
+            {
+                ShopName = shopsName.SelectedItem.ToString(),
+                ProductName = productName.Text,
+                ManufacturerName = manufacturerName.Text,
+                Price = double.Parse(price.Text),
+                Volume = double.Parse(volume.Text),
+                PricePerVolume = double.Parse(pricePerVolume.Text),
+                PricePerQuantity = double.Parse(pricePerQuantity.Text),
+                CreatedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.UtcNow
+            };
+
+            await App.Database.SaveProductAsync(_product);
+            await Navigation.PushAsync(new MainPage());
         }
 
         private void OnPriceChange(object sender, TextChangedEventArgs e)
@@ -53,10 +67,10 @@ namespace SPCApp
             {
                 if (volume.Text == null || volume.Text == "0")
                     pricePerVolume.Text = null;
-                else 
+                else
                 {
-                    var priceValue = double.Parse((price.Text).Replace(',', '.'));
-                    var volumeValue = double.Parse((volume.Text).Replace(',', '.'));
+                    var priceValue = double.Parse(price.Text);
+                    var volumeValue = double.Parse(volume.Text);
                     pricePerVolume.Text = Math.Round(priceValue * 100 / volumeValue, 2).ToString();
                 }
             }
@@ -73,8 +87,8 @@ namespace SPCApp
                     pricePerQuantity.Text = price.Text;
                 else
                 {
-                    var priceValue = double.Parse((price.Text).Replace(',', '.'));
-                    var quantityValue = double.Parse((quantity.Text).Replace(',', '.'));
+                    var priceValue = double.Parse(price.Text);
+                    var quantityValue = double.Parse(quantity.Text);
                     pricePerQuantity.Text = Math.Round(priceValue / quantityValue, 2).ToString();
                 }
             }

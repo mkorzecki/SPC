@@ -6,7 +6,21 @@
              mc:Ignorable="d"
              x:Class="SPCApp.ProductsPage"
              Title="Products">
-    <ListView x:Name="listView"
+    <StackLayout>
+        <Picker x:Name="sorting" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>cena malejąco</x:String>
+                    <x:String>cena rosnąco</x:String>
+                    <x:String>produkt A-Z</x:String>
+                    <x:String>produkt Z-A</x:String>
+                    <x:String>sklep A-Z</x:String>
+                    <x:String>sklep Z-A </x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <SearchBar x:Name="MainSearchBar" TextChanged="SearchBar_TextChanged"/>
+        <ListView x:Name="productsListView"
               Margin="20"
               ItemSelected="OnListViewItemSelected">
         <ListView.ItemTemplate>
@@ -22,4 +36,5 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+    </StackLayout>
 </ContentPage>

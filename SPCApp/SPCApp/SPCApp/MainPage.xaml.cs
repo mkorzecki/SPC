@@ -21,10 +21,7 @@ namespace SPCApp
 
         private async void OnCreateNewProductButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewProductPage
-            {
-                BindingContext = new Product()
-            });
+            await Navigation.PushAsync(new NewProductPage());
         }
 
         private async void OnShowAllProductButtonClicked(object sender, EventArgs e)

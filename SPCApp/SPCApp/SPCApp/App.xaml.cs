@@ -7,19 +7,22 @@ namespace SPCApp
 {
     public partial class App : Application
     {
-        static ProductsDatabase database;
 
-        public static ProductsDatabase Database
+
+        static ProductsLocalDatabase database;
+
+        public static ProductsLocalDatabase Database
         {
             get
             {
                 if (database == null)
                 {
-                    database = new ProductsDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Products.db3"));
+                    database = new ProductsLocalDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Products.db3"));
                 }
                 return database;
             }
         }
+
         public App()
         {
             InitializeComponent();

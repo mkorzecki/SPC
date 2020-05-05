@@ -13,23 +13,42 @@ namespace SPCApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditProductPage : ContentPage
     {
-        public EditProductPage()
+        private Product _product;
+        public EditProductPage(Product product)
         {
             InitializeComponent();
+            //shopsName.Items.Add("Biedronka");
+            //shopsName.Items.Add("Stokrotka");
+            //shopsName.Items.Add("Selgros");
+
+            _product = product;
+            shopsName.SelectedItem = _product.ShopName;
+            productName.Text = _product.ProductName;
+            manufacturerName.Text = _product.ManufacturerName;
+            price.Text = _product.Price.ToString();
+            volume.Text = _product.Volume.ToString();
+            pricePerVolume.Text = _product.PricePerVolume.ToString();
+            quantity.Text = _product.Quantity.ToString();
+            pricePerQuantity.Text = _product.PricePerQuantity.ToString();
         }
 
         private async void OnEditProductButtonClicked(object sender, EventArgs e)
         {
-            var product = (Product)BindingContext;
-            product.ModifiedDate = DateTime.UtcNow;
-            await App.Database.SaveProductAsync(product);
+            _product.ShopName = shopsName.SelectedItem.ToString();
+            _product.ProductName = productName.Text;
+            _product.ManufacturerName = manufacturerName.Text;
+            _product.Price = double.Parse(price.Text);
+            _product.Volume = double.Parse(volume.Text);
+            _product.PricePerVolume = double.Parse(pricePerVolume.Text);
+            _product.PricePerQuantity = double.Parse(pricePerQuantity.Text);
+            _product.ModifiedDate = DateTime.UtcNow;
+            await App.Database.SaveProductAsync(_product);
             await Navigation.PushAsync(new ProductsPage());
         }
 
         private async void OnDeleteProductButtonClicked(object sender, EventArgs e)
         {
-            var product = (Product)BindingContext;
-            await App.Database.DeleteProductAsync(product);
+            await App.Database.DeleteProductAsync(_product);
             await Navigation.PushAsync(new ProductsPage());
         }
 
@@ -58,8 +77,8 @@ namespace SPCApp
                     pricePerVolume.Text = null;
                 else
                 {
-                    var priceValue = double.Parse((price.Text).Replace(',', '.'));
-                    var volumeValue = double.Parse((volume.Text).Replace(',', '.'));
+                    var priceValue = double.Parse(price.Text);
+                    var volumeValue = double.Parse(volume.Text);
                     pricePerVolume.Text = Math.Round(priceValue * 100 / volumeValue, 2).ToString();
                 }
             }
@@ -76,8 +95,8 @@ namespace SPCApp
                     pricePerQuantity.Text = price.Text;
                 else
                 {
-                    var priceValue = double.Parse((price.Text).Replace(',', '.'));
-                    var quantityValue = double.Parse((quantity.Text).Replace(',', '.'));
+                    var priceValue = double.Parse(price.Text);
+                    var quantityValue = double.Parse(quantity.Text);
                     pricePerQuantity.Text = Math.Round(priceValue / quantityValue, 2).ToString();
                 }
             }

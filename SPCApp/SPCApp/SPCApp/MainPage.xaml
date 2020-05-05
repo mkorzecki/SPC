@@ -6,8 +6,11 @@
              mc:Ignorable="d"
              x:Class="SPCApp.MainPage"
              Title="Shop Price Comparing">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Clicked="OnCreateNewProductButtonClicked" />
+    </ContentPage.ToolbarItems>
     <StackLayout>
-        <Button Text="Create new product" Clicked="OnCreateNewProductButtonClicked"/>
             <Button Text="Show all product" Clicked="OnShowAllProductButtonClicked"/>
         </StackLayout>
 </ContentPage>

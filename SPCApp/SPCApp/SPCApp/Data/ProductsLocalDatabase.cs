@@ -5,11 +5,11 @@ using SQLite;
 
 namespace SPCApp.Data
 {
-    public class ProductsDatabase
+    public class ProductsLocalDatabase
     {
         readonly SQLiteAsyncConnection _database;
 
-        public ProductsDatabase(string dbPath)
+        public ProductsLocalDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<Product>().Wait();
