@@ -17,10 +17,6 @@ namespace SPCApp
         public EditProductPage(Product product)
         {
             InitializeComponent();
-            //shopsName.Items.Add("Biedronka");
-            //shopsName.Items.Add("Stokrotka");
-            //shopsName.Items.Add("Selgros");
-
             _product = product;
             shopsName.SelectedItem = _product.ShopName;
             productName.Text = _product.ProductName;
@@ -40,15 +36,16 @@ namespace SPCApp
             _product.Price = double.Parse(price.Text);
             _product.Volume = double.Parse(volume.Text);
             _product.PricePerVolume = double.Parse(pricePerVolume.Text);
+            _product.Quantity = int.Parse(quantity.Text);
             _product.PricePerQuantity = double.Parse(pricePerQuantity.Text);
             _product.ModifiedDate = DateTime.UtcNow;
-            await App.Database.SaveProductAsync(_product);
+            App.Database.SaveProductAsync(_product);
             await Navigation.PushAsync(new ProductsPage());
         }
 
         private async void OnDeleteProductButtonClicked(object sender, EventArgs e)
         {
-            await App.Database.DeleteProductAsync(_product);
+            App.Database.DeleteProductAsync(_product.ID);
             await Navigation.PushAsync(new ProductsPage());
         }
 

@@ -19,9 +19,6 @@ namespace SPCApp
         public NewProductPage()
         {
             InitializeComponent();
-            //shopsName.Items.Add("Biedronka");
-            //shopsName.Items.Add("Stokrotka");
-            //shopsName.Items.Add("Selgros");
         }
 
         async private void OnAddNewProductButtonClicked(object sender, EventArgs e)
@@ -34,12 +31,12 @@ namespace SPCApp
                 Price = double.Parse(price.Text),
                 Volume = double.Parse(volume.Text),
                 PricePerVolume = double.Parse(pricePerVolume.Text),
+                Quantity = int.Parse(quantity.Text),
                 PricePerQuantity = double.Parse(pricePerQuantity.Text),
                 CreatedDate = DateTime.UtcNow,
                 ModifiedDate = DateTime.UtcNow
             };
-
-            await App.Database.SaveProductAsync(_product);
+            App.Database.SaveProductAsync(_product);
             await Navigation.PushAsync(new MainPage());
         }
 

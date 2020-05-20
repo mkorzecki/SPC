@@ -9,16 +9,16 @@ namespace SPCApp
     {
 
 
-        static ProductsLocalDatabase database;
+        static ProductsDatabase database;
 
-        public static ProductsLocalDatabase Database
+        public static ProductsDatabase Database
         {
             get
             {
                 if (database == null)
                 {
-                    database = new ProductsLocalDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Products.db3"));
-                }
+                    database = new ProductsDatabase("Server=db4free.net;Port=3306;database=spcdatabase;User Id=spcuser;Password=spcpassword;charset=utf8");                   
+                }                
                 return database;
             }
         }

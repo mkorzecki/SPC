@@ -17,7 +17,7 @@ namespace SPCApp
     public partial class ProductsPage : ContentPage
     {
         public ObservableCollection<Product> _products = new ObservableCollection<Product>();
-        List<Product> products = new List<Product>();
+        public string _typingWord;
 
         public ProductsPage()
         {
@@ -27,12 +27,12 @@ namespace SPCApp
         {
             base.OnAppearing();
 
-            List<Product> _products = await App.Database.GetProductsAsync();
-            foreach (var product in _products)
+            var products =  App.Database.GetProducts();       
+            foreach (var product in products)
             {
-                products.Add(product);
+                _products.Add(product);
             }
-            productsListView.ItemsSource = products.OrderByDescending(p => p.CreatedDate).ToList();
+            productsListView.ItemsSource = _products.OrderByDescending(p => p.ProductName).ToList();
         }
 
         private async void OnCreateNewProductButtonClicked(object sender, EventArgs e)
@@ -53,21 +53,10 @@ namespace SPCApp
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var typingWord = MainSearchBar.Text.ToLower();
-            productsListView.ItemsSource = products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(typingWord)
-                                                            || p.ShopName != null && p.ShopName.ToLower().Contains(typingWord));
+            _typingWord = MainSearchBar.Text.ToLower();
+            productsListView.ItemsSource = _products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(_typingWord)
+                                                            || p.ShopName != null && p.ShopName.ToLower().Contains(_typingWord));
         }
-
-        private void sortByNameDesc(object sender, EventArgs e)
-        {
-            productsListView.ItemsSource = products.OrderByDescending(p => p.ProductName);
-        }
-
-        private void sortByNameAsc(object sender, EventArgs e)
-        {
-            productsListView.ItemsSource = products.OrderBy(p => p.ProductName);
-        }
-
         private void OnSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
@@ -78,25 +67,31 @@ namespace SPCApp
                 switch (selectedIndex)
                 {
                     case 0:
-                        productsListView.ItemsSource = products.OrderBy(p => p.PricePerVolume).ToList();
+                        productsListView.ItemsSource = _products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(_typingWord) || p.ShopName != null && p.ShopName.ToLower().Contains(_typingWord))
+                            .OrderByDescending(p => p.PricePerVolume).ToList();
                         break;
                     case 1:
-                        productsListView.ItemsSource = products.OrderByDescending(p => p.PricePerVolume).ToList();
+                        productsListView.ItemsSource = _products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(_typingWord) || p.ShopName != null && p.ShopName.ToLower().Contains(_typingWord))
+                            .OrderBy(p => p.PricePerVolume).ToList();
                         break;
                     case 2:
-                        productsListView.ItemsSource = products.OrderBy(p => p.ProductName).ToList();
+                        productsListView.ItemsSource = _products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(_typingWord) || p.ShopName != null && p.ShopName.ToLower().Contains(_typingWord))
+                            .OrderBy(p => p.ProductName).ToList();
                         break;
                     case 3:
-                        productsListView.ItemsSource = products.OrderByDescending(p => p.ProductName).ToList();
+                        productsListView.ItemsSource = _products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(_typingWord) || p.ShopName != null && p.ShopName.ToLower().Contains(_typingWord))
+                            .OrderByDescending(p => p.ProductName).ToList();
                         break;
                     case 4:
-                        productsListView.ItemsSource = products.OrderBy(p => p.ShopName).ToList();
+                        productsListView.ItemsSource = _products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(_typingWord) || p.ShopName != null && p.ShopName.ToLower().Contains(_typingWord))
+                            .OrderBy(p => p.ShopName).ToList();
                         break;
                     case 5:
-                        productsListView.ItemsSource = products.OrderByDescending(p => p.ShopName).ToList();
+                        productsListView.ItemsSource = _products.Where(p => p.ProductName != null && p.ProductName.ToLower().Contains(_typingWord) || p.ShopName != null && p.ShopName.ToLower().Contains(_typingWord))
+                            .OrderByDescending(p => p.ShopName).ToList();
                         break;
                     default:
-                        productsListView.ItemsSource = products.OrderByDescending(p => p.CreatedDate).ToList();
+                        productsListView.ItemsSource = _products.OrderByDescending(p => p.CreatedDate).ToList();
                     break;
                 }
             }
