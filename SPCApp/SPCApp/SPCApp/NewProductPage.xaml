@@ -47,5 +47,5 @@
             <Entry x:Name="pricePerQuantity" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"  IsReadOnly="True" Text="{Binding PricePerQuantity,  StringFormat=''}" />
         </StackLayout>
         <Button x:Name="addNewProductButton" Text="Add new product" Clicked="OnAddNewProductButtonClicked" IsVisible="false"/>
-    </StackLayout>
+     </StackLayout>
 </ContentPage>

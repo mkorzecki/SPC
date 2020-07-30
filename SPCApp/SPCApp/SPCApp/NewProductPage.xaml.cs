@@ -1,4 +1,6 @@
-﻿using SPCApp.Models;
+﻿using Newtonsoft.Json.Linq;
+using SPCApp.Data;
+using SPCApp.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,8 @@ namespace SPCApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewProductPage : ContentPage
     {
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+
         private Product _product;
         public NewProductPage()
         {
@@ -36,7 +40,8 @@ namespace SPCApp
                 CreatedDate = DateTime.UtcNow,
                 ModifiedDate = DateTime.UtcNow
             };
-            App.Database.SaveProductAsync(_product);
+            await firebaseHelper.AddProduct(_product);
+            await DisplayAlert("Success", "Product Added Successfully", "OK");
             await Navigation.PushAsync(new MainPage());
         }
 

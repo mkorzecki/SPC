@@ -47,7 +47,7 @@
             <Label Text="Cena za sztukę [zł]:" VerticalOptions="Center" WidthRequest="120"/>
             <Entry x:Name="pricePerQuantity"  HorizontalOptions="FillAndExpand"  IsReadOnly="True" Text="{Binding PricePerQuantity}" />
         </StackLayout>
-        <Button x:Name="EditProductButton" Text="Edit product" Clicked="OnEditProductButtonClicked"/>
+            <Button x:Name="EditProductButton" Text="Edit product" Clicked="OnEditProductButtonClicked"/>
             <Button x:Name="deleteProducttButton" Text="Delete product" Clicked="OnDeleteProductButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>

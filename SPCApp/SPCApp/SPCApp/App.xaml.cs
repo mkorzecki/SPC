@@ -2,12 +2,13 @@
 using System;
 using Xamarin.Forms;
 using System.IO;
+using SPCApp.Models;
 
 namespace SPCApp
 {
     public partial class App : Application
     {
-
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         static ProductsDatabase database;
 
@@ -34,8 +35,9 @@ namespace SPCApp
         {
         }
 
-        protected override void OnSleep()
+        protected async override void OnSleep()
         {
+            await firebaseHelper.CreateProductsBackUp();
         }
 
         protected override void OnResume()

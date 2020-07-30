@@ -1,4 +1,5 @@
-﻿using SPCApp.Models;
+﻿using SPCApp.Data;
+using SPCApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace SPCApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditProductPage : ContentPage
     {
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+
         private Product _product;
         public EditProductPage(Product product)
         {
@@ -39,14 +42,16 @@ namespace SPCApp
             _product.Quantity = int.Parse(quantity.Text);
             _product.PricePerQuantity = double.Parse(pricePerQuantity.Text);
             _product.ModifiedDate = DateTime.UtcNow;
-            App.Database.SaveProductAsync(_product);
-            await Navigation.PushAsync(new ProductsPage());
+            await firebaseHelper.UpdateProduct(_product);
+            await DisplayAlert("Success", "Product Updated Successfully", "OK");
+            await Navigation.PushAsync(new MainPage());
         }
 
         private async void OnDeleteProductButtonClicked(object sender, EventArgs e)
         {
-            App.Database.DeleteProductAsync(_product.ID);
-            await Navigation.PushAsync(new ProductsPage());
+            await firebaseHelper.DeleteProduct(_product.ID);
+            await DisplayAlert("Success", "Product Deleted Successfully", "OK");
+            await Navigation.PushAsync(new MainPage());
         }
 
         private void OnPriceChange(object sender, TextChangedEventArgs e)
